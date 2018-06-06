@@ -26,4 +26,8 @@ public interface LogInterface {
 
     void e(String tag, Throwable throwable);
 
+    void json(String json);
+
+    void json(String tag, String json);
+
 }

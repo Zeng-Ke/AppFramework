@@ -73,6 +73,16 @@ public class LogManager implements LogInterface {
 
     @Override
     public void e(String tag, Throwable throwable) {
-        Logger.t(tag).e(throwable,tag,"");
+        Logger.t(tag).e(throwable, tag, "");
+    }
+
+    @Override
+    public void json(String json) {
+        Logger.json(json);
+    }
+
+    @Override
+    public void json(String tag, String json) {
+        Logger.t(tag).json(json);
     }
 }

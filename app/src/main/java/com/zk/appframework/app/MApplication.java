@@ -19,8 +19,7 @@ public class MApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-
-        LogUtil.init(LogManager.initAndReturn(PrettyFormatStrategy
+        LogUtil.init(true,LogManager.initAndReturn(PrettyFormatStrategy
                 .newBuilder()
                 .showThreadInfo(true)//是否显示线程信息
                 .methodCount(2)  //显示的方法行数
