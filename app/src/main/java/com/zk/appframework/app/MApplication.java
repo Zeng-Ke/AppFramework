@@ -19,14 +19,12 @@ public class MApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        LogUtil.init(true,LogManager.initAndReturn(PrettyFormatStrategy
+        LogUtil.init(isDebug, LogManager.initAndReturn(PrettyFormatStrategy
                 .newBuilder()
                 .showThreadInfo(true)//是否显示线程信息
                 .methodCount(2)  //显示的方法行数
                 .methodOffset(5)//内部方法调用偏移量
                 .tag("AppFramework")
                 .build()));
-
-
     }
 }
