@@ -1,6 +1,4 @@
-package com.zk.android_utils;
-
-import android.util.Log;
+package com.zk.android_utils.manager;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;

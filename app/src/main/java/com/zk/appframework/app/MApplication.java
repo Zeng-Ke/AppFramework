@@ -3,7 +3,7 @@ package com.zk.appframework.app;
 import android.app.Application;
 
 import com.orhanobut.logger.PrettyFormatStrategy;
-import com.zk.android_utils.LogManager;
+import com.zk.android_utils.manager.LogManager;
 import com.zk.appframework.BuildConfig;
 import com.zk.java_utils.log.LogUtil;
 

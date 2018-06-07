@@ -4,19 +4,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.zk.android_utils.base.PresenterActivity;
 import com.zk.java_utils.Test;
 import com.zk.java_utils.log.LogUtil;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends PresenterActivity<MainPresenter, MainPresenter.MainView> implements MainPresenter.MainView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Test.log();
+        getPresenter().loadData();
 
     }
 
 
+    @Override
+    public void returnData(String s) {
+        LogUtil.d(s);
+    }
 }
