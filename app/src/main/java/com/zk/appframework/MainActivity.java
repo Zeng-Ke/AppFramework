@@ -11,7 +11,6 @@ public class MainActivity extends PresenterActivity<MainPresenter, MainPresenter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         getPresenter().loadData();
 
     }
@@ -20,5 +19,12 @@ public class MainActivity extends PresenterActivity<MainPresenter, MainPresenter
     @Override
     public void returnData(String s) {
         LogUtil.d(s);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
     }
 }

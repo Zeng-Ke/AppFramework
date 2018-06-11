@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 import com.zk.android_utils.manager.ActivityUtil;
+import com.zk.java_utils.log.LogUtil;
 
 /**
  * author: ZK.
@@ -17,7 +18,10 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogUtil.i(this.getClass().getName() + "  :    onCreate");
         ActivityUtil.add(this);
+
+
     }
 
 
@@ -30,6 +34,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LogUtil.i(this.getClass().getName() + "  :    onDestroy");
         ActivityUtil.removeActivity(this);
     }
 
