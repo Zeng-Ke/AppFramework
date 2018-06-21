@@ -6,4 +6,6 @@ package com.zk.android_utils.base;
  */
 public interface IView {
 
+
+
 }

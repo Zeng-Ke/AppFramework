@@ -1,4 +1,4 @@
-package com.zk.appframework;
+package com.zk.appframework.presenters;
 
 import com.zk.android_utils.base.BasePresenter;
 import com.zk.android_utils.base.IView;
@@ -15,11 +15,7 @@ public class MainPresenter extends BasePresenter<MainPresenter.MainView> {
     }
 
     public interface MainView extends IView {
-        void  returnData(String s);
     }
 
-    public  void  loadData(){
-        String s = "presenter";
-        getView().returnData(s);
-    }
+
 }

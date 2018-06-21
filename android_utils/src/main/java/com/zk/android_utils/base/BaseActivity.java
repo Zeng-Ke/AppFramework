@@ -12,7 +12,7 @@ import com.zk.java_utils.log.LogUtil;
  * author: ZK.
  * date:   On 2018/6/7.
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements IView {
 
 
     @Override

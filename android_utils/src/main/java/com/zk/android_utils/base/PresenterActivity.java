@@ -9,7 +9,7 @@ import com.zk.android_utils.PresenterUtil;
  * author: ZK.
  * date:   On 2018/6/7.
  */
-public class PresenterActivity<T extends BasePresenter<E>, E extends IView> extends BaseActivity implements IView {
+public abstract class PresenterActivity<T extends BasePresenter<E>, E extends IView> extends BaseActivity {
 
 
     private T mPresenter;
@@ -18,8 +18,12 @@ public class PresenterActivity<T extends BasePresenter<E>, E extends IView> exte
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = PresenterUtil.createPresenter(this);
+        initView(savedInstanceState);
         mPresenter.onViewCreate();
+
     }
+
+    public abstract void initView(Bundle savedInstanceState);
 
     protected T getPresenter() {
         return mPresenter;

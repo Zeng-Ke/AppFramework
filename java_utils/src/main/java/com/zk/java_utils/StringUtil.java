@@ -14,7 +14,7 @@ public class StringUtil {
     }
 
 
-    public boolean isNullOrEmpty(String str) {
+    public static boolean isNullOrEmpty(String str) {
         return EMPTY.equals(str) || str == null;
     }
 
