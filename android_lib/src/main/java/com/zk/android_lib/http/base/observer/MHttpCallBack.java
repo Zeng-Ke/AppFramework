@@ -1,5 +1,6 @@
 package com.zk.android_lib.http.base.observer;
 
+import com.zk.android_lib.http.base.IUnbinderManager;
 import com.zk.android_utils.base.BaseActivity;
 import com.zk.android_utils.base.BaseApplication;
 
@@ -9,16 +10,26 @@ import io.reactivex.disposables.Disposable;
  * author: ZK.
  * date:   On 2018/6/25.
  */
-public class MOberver<T> implements IObserver<T> {
+public class MHttpCallBack<T> implements IObserver<T> {
+    private IUnbinderManager mUnbinderManager;
+
+    public MHttpCallBack(IUnbinderManager manager) {
+        mUnbinderManager = manager;
+    }
 
 
     @Override
-    public void onSubscribe(Disposable disposable) {
+    public void onBind(Disposable disposable) {
+        mUnbinderManager.addUnbinder(disposable);
+    }
+
+    @Override
+    public void onStart() {
 
     }
 
     @Override
-    public void onNext(T t) {
+    public void onCallBack(T t) {
 
     }
 
@@ -26,6 +37,12 @@ public class MOberver<T> implements IObserver<T> {
     public void onComplete() {
 
     }
+
+    @Override
+    public void onUnBind(Disposable disposable) {
+        mUnbinderManager.removeUnbinder(disposable);
+    }
+
 
     @Override
     public void onError(Throwable throwable) {

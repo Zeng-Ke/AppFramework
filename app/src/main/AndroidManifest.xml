@@ -33,7 +33,7 @@
                     android:scheme="appframework"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activitys.IndexActivity"></activity>
+        <activity android:name=".activitys.HomePageActivity"></activity>
         <activity android:name=".activitys.GuideActivity"></activity>
     </application>
 

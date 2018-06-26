@@ -1,5 +1,7 @@
 package com.zk.android_lib.http.base.observer;
 
+import android.util.Log;
+
 import com.zk.java_lib.exception.NetworkException;
 import com.zk.java_utils.log.LogUtil;
 
@@ -22,12 +24,22 @@ public class BaseObserver<T> extends DisposableObserver<T> {
     }
 
     @Override
+    protected void onStart() {
+        LogUtil.d("=====", "onStart");
+        super.onStart();
+        mOberver.onBind(this);
+        mOberver.onStart();
+    }
+
+    @Override
     public void onNext(T value) {
-        mOberver.onNext(value);
+        LogUtil.d("=====", "onCallBack");
+        mOberver.onCallBack(value);
     }
 
     @Override
     public void onError(Throwable throwable) {
+        LogUtil.d("=====", "onError");
         LogUtil.e(throwable.getMessage());
         if (throwable instanceof SocketException || throwable instanceof SocketTimeoutException || throwable instanceof
                 UnknownHostException)
@@ -37,7 +49,9 @@ public class BaseObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onComplete() {
+        LogUtil.d("=====", "onComplete");
         LogUtil.d("onComplete");
         mOberver.onComplete();
+        mOberver.onUnBind(this);
     }
 }

@@ -37,8 +37,8 @@ public class BasePresenter<T extends IView> {
     }
 
     protected void onViewDestory() {
+        detachView();
     }
-
 
     protected void detachView() {
         mIView = null;

@@ -1,4 +1,4 @@
-package com.zk.appframework.presenters;
+package com.zk.android_lib.presenters;
 
 import com.zk.android_utils.base.BasePresenter;
 import com.zk.android_utils.base.IView;

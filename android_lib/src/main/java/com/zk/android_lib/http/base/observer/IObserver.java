@@ -8,12 +8,15 @@ import io.reactivex.disposables.Disposable;
  */
 public interface IObserver<T> {
 
-    public void onSubscribe(Disposable disposable);
+    void onBind(Disposable disposable);
 
-    public void onNext(T t);
+    void onStart();
 
+    void onCallBack(T t);
 
-    public void onComplete();
+    void onComplete();
 
-    public void onError(Throwable throwable);
+    void onUnBind(Disposable disposable);
+
+    void onError(Throwable throwable);
 }

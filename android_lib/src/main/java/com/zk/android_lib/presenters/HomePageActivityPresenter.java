@@ -1,6 +1,9 @@
-package com.zk.appframework.presenters;
+package com.zk.android_lib.presenters;
 
-import com.zk.android_lib.http.base.observer.MOberver;
+import android.util.Log;
+
+import com.zk.android_lib.http.base.observer.MHttpCallBack;
+import com.zk.android_lib.presenters.base.UnbinderPresenter;
 import com.zk.android_lib.service.FirstService;
 import com.zk.android_utils.base.BasePresenter;
 import com.zk.android_utils.base.IView;
@@ -15,10 +18,10 @@ import java.util.List;
  * author: ZK.
  * date:   On 2018/6/11.
  */
-public class IndexPresenter extends BasePresenter<IndexPresenter.IndexView> {
+public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivityPresenter.IndexView> {
 
 
-    public IndexPresenter(IndexView iView) {
+    public HomePageActivityPresenter(IndexView iView) {
         super(iView);
     }
 
@@ -31,9 +34,9 @@ public class IndexPresenter extends BasePresenter<IndexPresenter.IndexView> {
 
         FirstService firstService = new FirstService();
         firstService.getPhoneInfo(phoneNumber, "JQ4iONjs1LBg60Ghgj842cKvjgVE7dDRXfBpxsvWTrgP16hY5RtOaVgqy1Wky7MT",
-                new MOberver<BaseBean<List<PhoneInfoBean>>>() {
+                new MHttpCallBack<BaseBean<List<PhoneInfoBean>>>(this) {
                     @Override
-                    public void onNext(BaseBean<List<PhoneInfoBean>> phoneInfoBeans) {
+                    public void onCallBack(BaseBean<List<PhoneInfoBean>> phoneInfoBeans) {
                         if (phoneInfoBeans != null && phoneInfoBeans.data.size() > 0)
                             getView().onGetDataSuccess(phoneInfoBeans.data.get(0).toString());
                     }
@@ -43,14 +46,17 @@ public class IndexPresenter extends BasePresenter<IndexPresenter.IndexView> {
 
     public void getData() {
         FirstService firstService = new FirstService();
-        firstService.getJob(new MOberver<CommonDataBean<DoubleListBean>>() {
+        firstService.getJob(new MHttpCallBack<CommonDataBean<DoubleListBean>>(this) {
             @Override
-            public void onNext(CommonDataBean<DoubleListBean> commonDataBeanBaseBean) {
+            public void onCallBack(CommonDataBean<DoubleListBean> commonDataBeanBaseBean) {
                 if (commonDataBeanBaseBean != null && commonDataBeanBaseBean.items.size() > 0)
                     getView().onGetDataSuccess(commonDataBeanBaseBean.items.get(0).name);
             }
         });
     }
+
+
+
 
 
 }
