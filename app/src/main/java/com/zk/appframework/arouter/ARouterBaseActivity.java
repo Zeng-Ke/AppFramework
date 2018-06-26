@@ -5,10 +5,6 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.zk.android_utils.base.BaseActivity;
-import com.zk.android_utils.base.BasePresenter;
-import com.zk.android_utils.base.IView;
-import com.zk.android_utils.base.PresenterActivity;
-import com.zk.java_utils.StringUtil;
 import com.zk.java_utils.log.LogUtil;
 
 /**
@@ -43,7 +39,6 @@ public abstract class ARouterBaseActivity extends BaseActivity {
                         }
                     });
                     break;
-
             }
         }
 

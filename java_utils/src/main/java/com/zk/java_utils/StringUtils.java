@@ -4,7 +4,7 @@ package com.zk.java_utils;
  * author: ZK.
  * date:   On 2018/6/7.
  */
-public class StringUtil {
+public class StringUtils {
 
     public static final String EMPTY = "";
 

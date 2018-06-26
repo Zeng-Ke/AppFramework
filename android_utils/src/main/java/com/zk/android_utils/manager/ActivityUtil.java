@@ -3,7 +3,7 @@ package com.zk.android_utils.manager;
 import android.app.Activity;
 
 import com.zk.android_utils.base.BaseActivity;
-import com.zk.java_utils.StringUtil;
+import com.zk.java_utils.StringUtils;
 import com.zk.java_utils.log.LogUtil;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class ActivityUtil {
     public  static  boolean isExistActivity(Class activityClz){
         synchronized (mActivityList) {
             for (Activity activity : mActivityList) {
-                if (activity != null && StringUtil.equal(activity.getClass().getName(),activityClz.getName()))
+                if (activity != null && StringUtils.equal(activity.getClass().getName(),activityClz.getName()))
                     return  true;
             }
             return false;
@@ -95,7 +95,7 @@ public class ActivityUtil {
         synchronized (mActivityList) {
             if (clz != null)
                 for (Activity activity : mActivityList) {
-                    if (activity != null && !StringUtil.equal(activity.getClass().getName(), clz.getName()))
+                    if (activity != null && !StringUtils.equal(activity.getClass().getName(), clz.getName()))
                         activities.add(activity);
                 }
         }

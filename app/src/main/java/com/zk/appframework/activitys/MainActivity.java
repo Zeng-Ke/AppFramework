@@ -18,7 +18,8 @@ public class MainActivity extends ARouterPresenterActivity<MainPresenter, MainPr
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        handleUriLaunch(getIntent());
+        if (!handleUriLaunch(getIntent()))
+            ARouter.getInstance().build(IndexActivity.ROUTER_PATH).navigation();
     }
 
     @Override
@@ -27,16 +28,18 @@ public class MainActivity extends ARouterPresenterActivity<MainPresenter, MainPr
         handleUriLaunch(intent);
     }
 
-
-    public void handleUriLaunch(Intent intent) {
+    public boolean handleUriLaunch(Intent intent) {
         Uri uri = intent.getData();
         if (uri != null) {
             String uriStr = uri.toString();
-            ARouter.getInstance().build(IndexActivity.ROUTER_PATH).withString(IndexActivity.INTENT_URI, uriStr).navigation(this,
-                    getNavCallBack());
+            ARouter.getInstance()
+                    .build(IndexActivity.ROUTER_PATH)
+                    .withString(IndexActivity.INTENT_URI, uriStr)
+                    .navigation(this, getNavCallBack());
+            return true;
         }
+        return false;
     }
-
 
     @Override
     protected boolean onBeforeBackPress() {

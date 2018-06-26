@@ -29,10 +29,8 @@ public  class ARouterPresenterActivity<T extends BasePresenter<E>, E extends IVi
 
     protected class FrameworkNavCallBack extends NavCallback {
 
-
         @Override
         public void onArrival(Postcard postcard) {
-
         }
 
         @Override
@@ -55,7 +53,6 @@ public  class ARouterPresenterActivity<T extends BasePresenter<E>, E extends IVi
         public void onLost(Postcard postcard) {
             //回调是在子线程，UI操作需切换回主线程
             LogUtil.e("找不到页面");
-
         }
 
         @Override

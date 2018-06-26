@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
+import com.zk.android_utils.ToastUtils;
 import com.zk.android_utils.manager.ActivityUtil;
+import com.zk.java_lib.exception.NetworkException;
 import com.zk.java_utils.log.LogUtil;
 
 /**
@@ -21,7 +23,11 @@ public class BaseActivity extends AppCompatActivity implements IView {
         LogUtil.i(this.getClass().getName() + "  :    onCreate");
         ActivityUtil.add(this);
 
+    }
 
+
+    public void onException(Throwable throwable) {
+        ToastUtils.showShort(this, throwable.getMessage());
     }
 
 

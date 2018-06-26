@@ -71,12 +71,12 @@ public class LogUtil {
             mLogInterface.e(msg, throwable);
     }
 
-    public void json(String json) {
+    public static void json(String json) {
         if (mIsDebug)
             mLogInterface.json(json);
     }
 
-    public void json(String tag, String json) {
+    public  static void json(String tag, String json) {
         if (mIsDebug)
             mLogInterface.json(tag, json);
     }
