@@ -1,7 +1,7 @@
 package com.zk.android_lib.http.base;
 
-import com.zk.android_lib.http.base.observer.BaseObserver;
-import com.zk.android_lib.http.base.observer.IObserver;
+import com.zk.android_lib.http.base.callbacker.BaseCallBacker;
+import com.zk.android_lib.http.base.callbacker.ICallbacker;
 
 /**
  * author: ZK.
@@ -9,7 +9,7 @@ import com.zk.android_lib.http.base.observer.IObserver;
  */
 public class BaseService {
 
-    public <T> BaseObserver<T> getObserver(IObserver<T> observer) {
-        return new BaseObserver<>(observer);
+    public <T> BaseCallBacker<T> getCallBacker(ICallbacker<T> observer) {
+        return new BaseCallBacker<>(observer);
     }
 }

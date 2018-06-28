@@ -1,4 +1,4 @@
-package com.zk.android_lib.http.base.observer;
+package com.zk.android_lib.http.base.callbacker;
 
 import com.zk.android_lib.http.base.IUnbinderManager;
 import com.zk.android_utils.base.BaseActivity;
@@ -10,10 +10,10 @@ import io.reactivex.disposables.Disposable;
  * author: ZK.
  * date:   On 2018/6/25.
  */
-public class MHttpCallBack<T> implements IObserver<T> {
+public class AsyncCallBacker<T> implements ICallbacker<T> {
     private IUnbinderManager mUnbinderManager;
 
-    public MHttpCallBack(IUnbinderManager manager) {
+    public AsyncCallBacker(IUnbinderManager manager) {
         mUnbinderManager = manager;
     }
 

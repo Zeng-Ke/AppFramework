@@ -1,9 +1,12 @@
-package com.zk.android_lib.http.base;
+package com.zk.android_lib.http.base.interceptor;
+
+import android.util.Log;
 
 import com.zk.java_lib.bean.base.BaseBean;
 import com.zk.java_lib.exception.ApiException;
 import com.zk.java_lib.exception.ErrorCode;
 import com.zk.java_lib.exception.NetworkException;
+import com.zk.java_utils.log.LogUtil;
 
 import io.reactivex.functions.Function;
 
@@ -11,7 +14,7 @@ import io.reactivex.functions.Function;
  * author: ZK.
  * date:   On 2018/6/23.
  */
-public class ExceptionFunction<T> implements Function<BaseBean<T>, BaseBean<T>> {
+public class ExceptionInterceptor<T> implements Function<BaseBean<T>, BaseBean<T>> {
     @Override
     public BaseBean apply(BaseBean baseBean) throws Exception {
         if (baseBean == null)

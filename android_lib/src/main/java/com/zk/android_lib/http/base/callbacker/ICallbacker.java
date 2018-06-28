@@ -1,4 +1,4 @@
-package com.zk.android_lib.http.base.observer;
+package com.zk.android_lib.http.base.callbacker;
 
 import io.reactivex.disposables.Disposable;
 
@@ -6,7 +6,7 @@ import io.reactivex.disposables.Disposable;
  * author: ZK.
  * date:   On 2018/6/25.
  */
-public interface IObserver<T> {
+public interface ICallbacker<T> {
 
     void onBind(Disposable disposable);
 

@@ -21,10 +21,16 @@ public interface IFirstApi {
     @GET("/tools/phone_number_ascription")
     Observable<BaseBean<List<PhoneInfoBean>>> getPhoneInfo(
             @Query("phoneNumber") String phoneNumber,
-            @Query("apikey") String apikey
-    );
-
+            @Query("apikey") String apikey);
 
     @GET("/CommonData/JobClass")
     Observable<BaseBean<CommonDataBean<DoubleListBean>>> getJob();
+
+
+    @GET("/CommonData/Area")
+    Observable<BaseBean<CommonDataBean<DoubleListBean>>> getArea(
+            @Query("deep") int deep,
+            @Query("parent") String parent);
+
+
 }

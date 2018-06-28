@@ -3,7 +3,6 @@ package com.zk.appframework.activitys;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,11 +28,9 @@ public class HomePageActivity extends ARouterPresenterActivity<HomePageActivityP
         setContentView(R.layout.activity_index);
         handleUriLaunch(getIntent());
         mTvInfo = findViewById(R.id.tv_text);
-        getPresenter().getData();
-        getPresenter().getData();
-        getPresenter().getData();
-        getPresenter().getData();
-        getPresenter().getData();
+        getPresenter().getData1();
+       // getPresenter().getJob();
+
 
         mTvInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,11 +56,10 @@ public class HomePageActivity extends ARouterPresenterActivity<HomePageActivityP
     }
 
 
-
     @Override
     public void onGetDataSuccess(String info) {
         mTvInfo.setText(info);
-        ToastUtils.showShort(this,"onGetDataSuccess");
-       // Log.d("====","onGetDataSuccess");
+        ToastUtils.showShort(this, "onGetDataSuccess");
+        // Log.d("====","onGetDataSuccess");
     }
 }
