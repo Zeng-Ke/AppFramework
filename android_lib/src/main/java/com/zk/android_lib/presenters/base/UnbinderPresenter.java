@@ -24,22 +24,32 @@ public class UnbinderPresenter<T extends IView> extends BasePresenter<T> impleme
 
     @Override
     public void addUnbinder(Disposable disposable) {
-        synchronized (this){
+        synchronized (this) {
             unbinders.add(disposable);
         }
     }
 
     @Override
     public void removeUnbinder(Disposable disposable) {
-        synchronized (this){
+        synchronized (this) {
             unbinders.remove(disposable);
         }
+    }
+
+    @Override
+    public void showLoadingView() {
+        getView().showLoadingView();
+    }
+
+    @Override
+    public void dismissLoadingView() {
+        getView().dismissLoadingView();
     }
 
 
     @Override
     protected void onViewDestory() {
-        synchronized (this){
+        synchronized (this) {
             for (Disposable unbinder : unbinders) {
                 if (!unbinder.isDisposed())
                     unbinder.dispose();

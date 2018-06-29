@@ -12,4 +12,8 @@ public interface IUnbinderManager {
 
     void removeUnbinder(Disposable disposable);
 
+    void showLoadingView();
+
+    void dismissLoadingView();
+
 }

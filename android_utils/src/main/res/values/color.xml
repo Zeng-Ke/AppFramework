@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white_ffffff">#ffffff</color>
+
+    <!-- 有透明度的 -->
+    <color name="transparency">#00000000</color>
+    <color name="transparency_5">#0d000000</color>
+    <color name="transparency_10">#1a000000</color>
+    <color name="transparency_15">#26000000</color>
+    <color name="transparency_20">#33000000</color>
+    <color name="transparency_25">#40000000</color>
+    <color name="transparency_30">#4d000000</color>
+    <color name="transparency_35">#59000000</color>
+    <color name="transparency_40">#66000000</color>
+    <color name="transparency_45">#73000000</color>
+    <color name="transparency_50">#80000000</color>
+    <color name="transparency_55">#8c000000</color>
+    <color name="transparency_60">#99000000</color>
+    <color name="transparency_65">#a6000000</color>
+    <color name="transparency_70">#b3000000</color>
+    <color name="transparency_75">#C0000000</color>
+    <color name="transparency_80">#cc000000</color>
+    <color name="transparency_85">#d9000000</color>
+    <color name="transparency_90">#e6000000</color>
+    <color name="transparency_95">#f2000000</color>
+
+</resources>

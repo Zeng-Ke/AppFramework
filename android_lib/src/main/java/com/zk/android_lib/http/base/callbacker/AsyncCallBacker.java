@@ -12,9 +12,11 @@ import io.reactivex.disposables.Disposable;
  */
 public class AsyncCallBacker<T> implements ICallbacker<T> {
     private IUnbinderManager mUnbinderManager;
+    private final boolean mRunLoading;
 
-    public AsyncCallBacker(IUnbinderManager manager) {
+    public AsyncCallBacker(IUnbinderManager manager, boolean runLoading) {
         mUnbinderManager = manager;
+        mRunLoading = runLoading;
     }
 
 
@@ -25,6 +27,8 @@ public class AsyncCallBacker<T> implements ICallbacker<T> {
 
     @Override
     public void onStart() {
+        if (mRunLoading)
+            mUnbinderManager.showLoadingView();
 
     }
 
@@ -35,7 +39,7 @@ public class AsyncCallBacker<T> implements ICallbacker<T> {
 
     @Override
     public void onComplete() {
-
+        mUnbinderManager.dismissLoadingView();
     }
 
     @Override
@@ -46,6 +50,7 @@ public class AsyncCallBacker<T> implements ICallbacker<T> {
 
     @Override
     public void onError(Throwable throwable) {
+        mUnbinderManager.dismissLoadingView();
         BaseActivity activity = BaseApplication.getActivityManager().getLastResumeActivity();
         if (activity != null)
             activity.onException(throwable);

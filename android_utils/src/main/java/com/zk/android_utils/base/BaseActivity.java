@@ -1,11 +1,14 @@
 package com.zk.android_utils.base;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 import com.zk.android_utils.ToastUtils;
+import com.zk.android_utils.executors.ThreadExecutor;
+import com.zk.android_utils.fragments.LoadingFragment;
 import com.zk.android_utils.manager.ActivityUtil;
 import com.zk.java_lib.exception.NetworkException;
 import com.zk.java_utils.log.LogUtil;
@@ -17,6 +20,8 @@ import com.zk.java_utils.log.LogUtil;
 public class BaseActivity extends AppCompatActivity implements IView {
 
 
+    private LoadingFragment mLoadingFragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +31,13 @@ public class BaseActivity extends AppCompatActivity implements IView {
     }
 
 
-    public void onException(Throwable throwable) {
-        ToastUtils.showShort(this, throwable.getMessage());
+    public void onException(final Throwable throwable) {
+        ThreadExecutor.runInMain(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtils.showShort(BaseActivity.this, throwable.getMessage());
+            }
+        });
     }
 
 
@@ -59,6 +69,31 @@ public class BaseActivity extends AppCompatActivity implements IView {
             return true;
         } else
             return false;
+    }
+
+    @Override
+    public void showLoadingView() {
+        ThreadExecutor.runInMain(new Runnable() {
+            @Override
+            public void run() {
+                if (mLoadingFragment == null)
+                    mLoadingFragment = LoadingFragment.getInstance(getSupportFragmentManager());
+                mLoadingFragment.show();
+            }
+        });
+    }
+
+    @Override
+    public void dismissLoadingView() {
+        if (mLoadingFragment != null) {
+            ThreadExecutor.runInMain(new Runnable() {
+                @Override
+                public void run() {
+                    mLoadingFragment.dismissAllowingStateLoss();
+                    mLoadingFragment.onDetach();
+                }
+            });
+        }
     }
 
 }

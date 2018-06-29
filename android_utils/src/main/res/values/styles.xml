@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TranslucentDialogFragment">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparency</item>
+        <item name="android:windowSoftInputMode">stateHidden|adjustResize</item>
+    </style>
+</resources>

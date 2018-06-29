@@ -36,12 +36,14 @@ public class BaseCallBacker<T> extends DisposableObserver<T> {
 
     @Override
     public void onError(Throwable throwable) {
-        LogUtil.e(throwable.getMessage());
+        LogUtil.e(throwable.getClass().getName() + ":" + throwable.getMessage());
         if (throwable instanceof SocketException || throwable instanceof SocketTimeoutException || throwable instanceof
                 UnknownHostException || throwable instanceof ConnectException)
             throwable = new NetworkException("网络错误");
         mOberver.onError(throwable);
+        mOberver.onUnBind(this);
     }
+
     @Override
     public void onComplete() {
         LogUtil.d("onComplete");

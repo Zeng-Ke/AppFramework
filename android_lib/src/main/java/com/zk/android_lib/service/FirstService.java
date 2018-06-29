@@ -13,6 +13,7 @@ import com.zk.java_lib.bean.base.BaseBean;
 import com.zk.java_lib.bean.base.CommonDataBean;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -63,6 +64,7 @@ public class FirstService extends BaseService {
                         ICallbacker<String> oberver) {
         mIFirstApi
                 .getArea(deep, parent)
+                .delay(3, TimeUnit.SECONDS)
                 .compose(RxUtils.io_main(function))
                 .subscribe(getCallBacker(oberver));
     }
@@ -70,7 +72,7 @@ public class FirstService extends BaseService {
 
     public Observable<String> getJob(AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>, String> function) {
         return mIFirstApi.getJob()
-                .compose(RxUtils.io(function));
+                .compose(RxUtils.io_main(function));
     }
 
     public Observable<String> getArea(int deep, String parent, AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>
