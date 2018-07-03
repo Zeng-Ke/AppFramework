@@ -44,4 +44,10 @@ public class LoadingFragment extends FullScreenDialogFragment {
         if (fragmentManager != null && !isAdded())
             show(fragmentManager, getClass().getName());
     }
+
+    @Override
+    public void dismissAllowingStateLoss() {
+        super.dismissAllowingStateLoss();
+
+    }
 }

@@ -6,8 +6,6 @@ import android.support.v4.app.DialogFragment;
 
 import com.zk.android_utils.R;
 
-import java.io.Serializable;
-
 /**
  * author: ZK.
  * date:   On 2018-06-28.

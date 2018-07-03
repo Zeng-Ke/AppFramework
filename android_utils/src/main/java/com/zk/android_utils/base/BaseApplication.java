@@ -3,7 +3,7 @@ package com.zk.android_utils.base;
 import android.app.Application;
 
 import com.orhanobut.logger.PrettyFormatStrategy;
-import com.zk.android_utils.DisplayUtils;
+import com.zk.android_utils.utils.DisplayUtils;
 import com.zk.android_utils.manager.ActivityManager;
 import com.zk.android_utils.manager.LogManager;
 import com.zk.java_utils.log.LogUtil;

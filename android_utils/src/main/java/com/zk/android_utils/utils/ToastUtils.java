@@ -1,4 +1,4 @@
-package com.zk.android_utils;
+package com.zk.android_utils.utils;
 
 import android.content.Context;
 import android.os.Handler;

@@ -8,11 +8,10 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zk.android_utils.ToastUtils;
+import com.zk.android_utils.utils.ToastUtils;
 import com.zk.appframework.R;
 import com.zk.appframework.arouter.ARouterPresenterActivity;
 import com.zk.android_lib.presenters.HomePageActivityPresenter;
-import com.zk.android_utils.fragments.LoadingFragment;
 import com.zk.java_utils.StringUtils;
 
 @Route(path = HomePageActivity.ROUTER_PATH)
@@ -29,8 +28,8 @@ public class HomePageActivity extends ARouterPresenterActivity<HomePageActivityP
         setContentView(R.layout.activity_index);
         handleUriLaunch(getIntent());
         mTvInfo = findViewById(R.id.tv_text);
-        getPresenter().getData();
-        // getPresenter().getJob();
+        //getPresenter().getData();
+         getPresenter().getJob();
 
         mTvInfo.setOnClickListener(new View.OnClickListener() {
             @Override

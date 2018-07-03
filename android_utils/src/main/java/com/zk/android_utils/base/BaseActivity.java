@@ -1,16 +1,14 @@
 package com.zk.android_utils.base;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
-import com.zk.android_utils.ToastUtils;
+import com.zk.android_utils.utils.ToastUtils;
 import com.zk.android_utils.executors.ThreadExecutor;
 import com.zk.android_utils.fragments.LoadingFragment;
 import com.zk.android_utils.manager.ActivityUtil;
-import com.zk.java_lib.exception.NetworkException;
 import com.zk.java_utils.log.LogUtil;
 
 /**
@@ -20,7 +18,8 @@ import com.zk.java_utils.log.LogUtil;
 public class BaseActivity extends AppCompatActivity implements IView {
 
 
-    private LoadingFragment mLoadingFragment;
+    private LoadingFragment mLoadingDialog;
+    private int mLoadingCount = 0; //当前页面显式加载数
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,21 +75,29 @@ public class BaseActivity extends AppCompatActivity implements IView {
         ThreadExecutor.runInMain(new Runnable() {
             @Override
             public void run() {
-                if (mLoadingFragment == null)
-                    mLoadingFragment = LoadingFragment.getInstance(getSupportFragmentManager());
-                mLoadingFragment.show();
+                synchronized (BaseActivity.this) {
+                    if (mLoadingDialog == null)
+                        mLoadingDialog = LoadingFragment.getInstance(getSupportFragmentManager());
+                    mLoadingDialog.show();
+                    mLoadingCount++;
+                }
             }
         });
     }
 
     @Override
     public void dismissLoadingView() {
-        if (mLoadingFragment != null) {
+        if (mLoadingDialog != null) {
             ThreadExecutor.runInMain(new Runnable() {
                 @Override
                 public void run() {
-                    mLoadingFragment.dismissAllowingStateLoss();
-                    mLoadingFragment.onDetach();
+                    synchronized (BaseActivity.this) {
+                        mLoadingCount--;
+                        if (mLoadingCount <= 0) {
+                            mLoadingDialog.dismissAllowingStateLoss();
+                            mLoadingDialog.onDetach();
+                        }
+                    }
                 }
             });
         }
