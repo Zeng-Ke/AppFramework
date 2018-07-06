@@ -6,6 +6,9 @@ package com.zk.java_utils;
  */
 public class StringUtils {
 
+
+    public static final String EMPTY = "";
+
     private StringUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }

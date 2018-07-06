@@ -16,12 +16,21 @@ import io.reactivex.ObservableTransformer;
 public class RxUtils {
 
 
+    public static <T> ObservableTransformer<BaseBean<T>, T> io_main(ObservableTransformer<T, T> cacheTransformer) {
+        return new Io_MainTransformer(cacheTransformer);
+    }
+
     public static <T> ObservableTransformer<BaseBean<T>, T> io_main() {
-        return new Io_MainTransformer();
+        return new Io_MainTransformer(null);
     }
 
     public static <T, R> ObservableTransformer<BaseBean<T>, R> io_main(AsyncCallBackInterceptor<T, R> function) {
-        return new Io_MainWithInterceptTransformer<>(function);
+        return new Io_MainWithInterceptTransformer<>(null, function);
+    }
+
+    public static <T, R> ObservableTransformer<BaseBean<T>, R> io_main(ObservableTransformer<T,
+            T> cacheTransformer, AsyncCallBackInterceptor<T, R> function) {
+        return new Io_MainWithInterceptTransformer<>(cacheTransformer, function);
     }
 
     public static <T> ObservableTransformer<BaseBean<T>, T> io() {
@@ -31,6 +40,5 @@ public class RxUtils {
     public static <T, R> ObservableTransformer<BaseBean<T>, R> io(AsyncCallBackInterceptor<T, R> function) {
         return new Io_WithInterceptTransformer<>(function);
     }
-
 
 }

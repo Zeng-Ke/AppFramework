@@ -41,7 +41,7 @@ public class ActivityUtil {
     public  static  boolean isExistActivity(Class activityClz){
         synchronized (mActivityList) {
             for (Activity activity : mActivityList) {
-                if (activity != null && StringUtils.equal(activity.getClass().getName(),activityClz.getName()))
+                if (activity != null && StringUtils.equals(activity.getClass().getName(),activityClz.getName()))
                     return  true;
             }
             return false;
@@ -95,7 +95,7 @@ public class ActivityUtil {
         synchronized (mActivityList) {
             if (clz != null)
                 for (Activity activity : mActivityList) {
-                    if (activity != null && !StringUtils.equal(activity.getClass().getName(), clz.getName()))
+                    if (activity != null && !StringUtils.equals(activity.getClass().getName(), clz.getName()))
                         activities.add(activity);
                 }
         }

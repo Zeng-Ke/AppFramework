@@ -16,8 +16,8 @@ import java.util.Locale;
 public class TimeUtils {
 
     public enum UNIT {
-        MSEC(1),
-        SEC(1000),
+        MILLIONSECOND(1),
+        SECOND(1000),
         MIN(60000),
         HOUR(3600000),
         DAY(86400000);
@@ -127,29 +127,29 @@ public class TimeUtils {
      * 获取两个时间差（单位：UNIT）
      */
     public static long getTimeSpan(final String time1, final String time2, final UNIT unit) {
-        return getTimeSpan(time1, time2, DEFAULT_FORMAT, unit.value);
+        return getTimeSpan(time1, time2, DEFAULT_FORMAT, unit);
     }
 
 
     /**
      * 获取两个时间差
      */
-    public static long getTimeSpan(final String time1, final String time2, final DateFormat format, final int value) {
-        return millis2TimeSpan(string2Millis(time1, format) - string2Millis(time2, format), value);
+    public static long getTimeSpan(final String time1, final String time2, final DateFormat format, final UNIT unit) {
+        return millis2TimeSpan(string2Millis(time1, format) - string2Millis(time2, format), unit);
     }
 
     /**
      * 获取两个时间差（单位：UNIT）
      */
     public static long getTimeSpan(final Date date1, final Date date2, final UNIT unit) {
-        return millis2TimeSpan(date2Millis(date1) - date2Millis(date2), unit.value);
+        return millis2TimeSpan(date2Millis(date1) - date2Millis(date2), unit);
     }
 
     /**
      * 获取两个时间差
      */
-    public static long getTimeSpan(final long millis1, final long millis2, final int unitValue) {
-        return millis2TimeSpan(millis1 - millis2, unitValue);
+    public static long getTimeSpan(final long millis1, final long millis2, final UNIT unit) {
+        return millis2TimeSpan(millis1 - millis2, unit);
     }
 
 
@@ -262,7 +262,7 @@ public class TimeUtils {
      * 获取与当前时间的差（单位：unit）
      */
     public static long getTimeSpanByNow(final String time, final UNIT unit) {
-        return getTimeSpan(time, getNowString(), DEFAULT_FORMAT, unit.value);
+        return getTimeSpan(time, getNowString(), DEFAULT_FORMAT, unit);
     }
 
     /**
@@ -271,7 +271,7 @@ public class TimeUtils {
     public static long getTimeSpanByNow(final String time,
                                         final DateFormat format,
                                         final UNIT unit) {
-        return getTimeSpan(time, getNowString(format), format, unit.value);
+        return getTimeSpan(time, getNowString(format), format, unit);
     }
 
     /**
@@ -285,7 +285,7 @@ public class TimeUtils {
      * 获取与当前时间的差（单位：unit）
      */
     public static long getTimeSpanByNow(final long millis, final UNIT unit) {
-        return getTimeSpan(millis, System.currentTimeMillis(), unit.value);
+        return getTimeSpan(millis, System.currentTimeMillis(), unit);
     }
 
     /**
@@ -359,7 +359,7 @@ public class TimeUtils {
         if (span < 1000) {
             return "刚刚";
         } else if (span < UNIT.MIN.value) {
-            return String.format(Locale.getDefault(), "%d秒前", span / UNIT.SEC.value);
+            return String.format(Locale.getDefault(), "%d秒前", span / UNIT.SECOND.value);
         } else if (span < UNIT.HOUR.value) {
             return String.format(Locale.getDefault(), "%d分钟前", span / UNIT.MIN.value);
         }
@@ -390,7 +390,7 @@ public class TimeUtils {
     public static long getMillis(final long millis,
                                  final long timeSpan,
                                  final UNIT unit) {
-        return millis + timeSpan2Millis(timeSpan, unit.value);
+        return millis + timeSpan2Millis(timeSpan, unit);
     }
 
 
@@ -405,13 +405,13 @@ public class TimeUtils {
                                  final DateFormat format,
                                  final long timeSpan,
                                  final UNIT unit) {
-        return string2Millis(time, format) + timeSpan2Millis(timeSpan, unit.value);
+        return string2Millis(time, format) + timeSpan2Millis(timeSpan, unit);
     }
 
     public static long getMillis(final Date date,
                                  final long timeSpan,
                                  final UNIT unit) {
-        return date2Millis(date) + timeSpan2Millis(timeSpan, unit.value);
+        return date2Millis(date) + timeSpan2Millis(timeSpan, unit);
     }
 
 
@@ -428,7 +428,7 @@ public class TimeUtils {
                                    final DateFormat format,
                                    final long timeSpan,
                                    final UNIT unit) {
-        return millis2String(millis + timeSpan2Millis(timeSpan, unit.value), format);
+        return millis2String(millis + timeSpan2Millis(timeSpan, unit), format);
     }
 
 
@@ -443,7 +443,7 @@ public class TimeUtils {
                                    final DateFormat format,
                                    final long timeSpan,
                                    final UNIT unit) {
-        return millis2String(string2Millis(time, format) + timeSpan2Millis(timeSpan, unit.value), format);
+        return millis2String(string2Millis(time, format) + timeSpan2Millis(timeSpan, unit), format);
     }
 
 
@@ -457,7 +457,7 @@ public class TimeUtils {
                                    final DateFormat format,
                                    final long timeSpan,
                                    final UNIT unit) {
-        return millis2String(date2Millis(date) + timeSpan2Millis(timeSpan, unit.value), format);
+        return millis2String(date2Millis(date) + timeSpan2Millis(timeSpan, unit), format);
     }
 
 
@@ -467,7 +467,7 @@ public class TimeUtils {
     public static Date getDate(final long millis,
                                final long timeSpan,
                                final UNIT unit) {
-        return millis2Date(millis + timeSpan2Millis(timeSpan, unit.value));
+        return millis2Date(millis + timeSpan2Millis(timeSpan, unit));
     }
 
 
@@ -481,14 +481,14 @@ public class TimeUtils {
                                final DateFormat format,
                                final long timeSpan,
                                final UNIT unit) {
-        return millis2Date(string2Millis(time, format) + timeSpan2Millis(timeSpan, unit.value));
+        return millis2Date(string2Millis(time, format) + timeSpan2Millis(timeSpan, unit));
     }
 
 
     public static Date getDate(final Date date,
                                final long timeSpan,
                                final UNIT unit) {
-        return millis2Date(date2Millis(date) + timeSpan2Millis(timeSpan, unit.value));
+        return millis2Date(date2Millis(date) + timeSpan2Millis(timeSpan, unit));
     }
 
     /**
@@ -719,13 +719,13 @@ public class TimeUtils {
                 : (month + 10) % 12];
     }
 
-    private static long timeSpan2Millis(final long timeSpan, final int unit) {
-        return timeSpan * unit;
+    private static long timeSpan2Millis(final long timeSpan, final UNIT unit) {
+        return timeSpan * unit.value;
     }
 
 
-    private static long millis2TimeSpan(final long millis, final int value) {
-        return millis / value;
+    private static long millis2TimeSpan(final long millis, final UNIT unit) {
+        return millis / unit.value;
     }
 
     private static String millis2FitTimeSpan(long millis, int precision) {

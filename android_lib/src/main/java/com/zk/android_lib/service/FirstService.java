@@ -1,12 +1,15 @@
 package com.zk.android_lib.service;
 
+import com.google.gson.reflect.TypeToken;
 import com.zk.android_lib.api.IFirstApi;
+import com.zk.android_lib.http.base.RxCache;
 import com.zk.android_lib.http.base.interceptor.AsyncCallBackInterceptor;
 import com.zk.android_lib.http.base.BaseService;
 import com.zk.android_lib.http.base.HttpCreator;
 import com.zk.android_lib.http.base.RxUtils;
 import com.zk.android_lib.http.base.callbacker.BaseCallBacker;
 import com.zk.android_lib.http.base.callbacker.ICallbacker;
+import com.zk.android_utils.cache.HttpCacheMode;
 import com.zk.java_lib.bean.DoubleListBean;
 import com.zk.java_lib.bean.PhoneInfoBean;
 import com.zk.java_lib.bean.base.BaseBean;
@@ -45,12 +48,17 @@ public class FirstService extends BaseService {
                 .subscribe(new BaseCallBacker<>(oberver));
     }
 
-    public void getJob(ICallbacker<CommonDataBean<DoubleListBean>> oberver) {
+    public void getJob(ICallbacker<CommonDataBean<DoubleListBean>> oberver, HttpCacheMode cacheMode) {
         mIFirstApi
                 .getJob()
-                .compose(RxUtils.<CommonDataBean<DoubleListBean>>io_main())
+               .compose(RxUtils.io_main(new RxCache(cacheMode)
+                       .<CommonDataBean<DoubleListBean>>excute("job",new TypeToken<CommonDataBean<DoubleListBean>>(){}.getType())))
+              // .compose(RxUtils.<CommonDataBean<DoubleListBean>>io_main())
                 .subscribe(getCallBacker(oberver));
     }
+
+
+
 
     public void getJob(AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>, String> function, ICallbacker<String> oberver) {
         mIFirstApi

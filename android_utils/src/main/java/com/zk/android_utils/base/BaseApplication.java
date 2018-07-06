@@ -3,6 +3,7 @@ package com.zk.android_utils.base;
 import android.app.Application;
 
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.zk.android_utils.utils.AppUtils;
 import com.zk.android_utils.utils.DisplayUtils;
 import com.zk.android_utils.manager.ActivityManager;
 import com.zk.android_utils.manager.LogManager;
@@ -26,7 +27,8 @@ public class BaseApplication extends Application {
                 .methodOffset(5)//内部方法调用偏移量
                 .tag("AppFramework")
                 .build()));
-        DisplayUtils.init(this);
+        //DisplayUtils.init(this);
+        AppUtils.init(this);
     }
 
     protected void setDebug(boolean isDebug) {

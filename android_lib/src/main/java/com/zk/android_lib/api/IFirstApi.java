@@ -27,6 +27,7 @@ public interface IFirstApi {
     Observable<BaseBean<CommonDataBean<DoubleListBean>>> getJob();
 
 
+
     @GET("/CommonData/Area")
     Observable<BaseBean<CommonDataBean<DoubleListBean>>> getArea(
             @Query("deep") int deep,

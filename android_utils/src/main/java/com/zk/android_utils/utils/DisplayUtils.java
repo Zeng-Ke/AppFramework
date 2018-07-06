@@ -10,8 +10,8 @@ import java.lang.reflect.Field;
 
 public class DisplayUtils {
     private static final float ROUND_CEIL = 0.5f;
-    private static DisplayMetrics sDisplayMetrics;
-    private static Resources sResources;
+    private static DisplayMetrics sDisplayMetrics = AppUtils.getApp().getResources().getDisplayMetrics();
+    private static Resources sResources = AppUtils.getApp().getResources();
 
     /**
      * 初始化操作

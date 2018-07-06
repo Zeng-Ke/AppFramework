@@ -24,18 +24,27 @@ public class Io_MainWithInterceptTransformer<T, R> implements ObservableTransfor
 
 
     private AsyncCallBackInterceptor<T, R> mInterceptor;
+    private ObservableTransformer<T, T> mCacheTransformer;
 
-    public Io_MainWithInterceptTransformer(@NonNull AsyncCallBackInterceptor<T, R> function) {
+    public Io_MainWithInterceptTransformer(ObservableTransformer<T, T> cacheTransformer, @NonNull AsyncCallBackInterceptor<T, R> function) {
         mInterceptor = function;
+        mCacheTransformer = cacheTransformer;
     }
 
     @Override
     public ObservableSource<R> apply(Observable<BaseBean<T>> upstream) {
+        mCacheTransformer = mCacheTransformer == null ? new ObservableTransformer<T, T>() {
+            @Override
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream;
+            }
+        } : mCacheTransformer;
 
         return upstream
                 .subscribeOn(Schedulers.io())
                 .map(new ExceptionInterceptor<T>())
                 .map(new HttpDataInterceptor<T>())
+                .compose(mCacheTransformer)
                 .map(mInterceptor)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -45,6 +54,4 @@ public class Io_MainWithInterceptTransformer<T, R> implements ObservableTransfor
                     }
                 });
     }
-
-
 }
