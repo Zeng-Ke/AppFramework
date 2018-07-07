@@ -24,6 +24,7 @@ public class RxCacheHandler {
 
     private Builder mBuilder;
     private final DiskCacheHandler mCacheHandler;
+    public static final long NO_EXPIRED = DiskCacheHandler.NO_EXPIRED; //不会过期
 
 
     public RxCacheHandler(Builder builder) {
@@ -80,7 +81,7 @@ public class RxCacheHandler {
     }
 
 
-    public <T> Observable<T> doGet(final String key, final Type type) {
+    public <T> Observable<T> doGet(final String key, final Type type, Function<Throwable, ObservableSource<T>> errorFunction) {
         return Observable
                 .create(new ObservableOnSubscribe<T>() {
                     @Override
@@ -90,12 +91,16 @@ public class RxCacheHandler {
                     }
                 })
                 .subscribeOn(Schedulers.io())
-                .onErrorResumeNext(new Function<Throwable, ObservableSource<? extends T>>() {
+                .onErrorResumeNext(errorFunction != null ? errorFunction : new Function<Throwable, ObservableSource<T>>() {
                     @Override
-                    public ObservableSource<? extends T> apply(Throwable throwable) throws Exception {
+                    public ObservableSource<T> apply(Throwable throwable) throws Exception {
                         return Observable.empty();
                     }
                 });
+    }
+
+    public <T> Observable<T> doGet(final String key, final Type type) {
+        return doGet(key, type, null);
     }
 
 

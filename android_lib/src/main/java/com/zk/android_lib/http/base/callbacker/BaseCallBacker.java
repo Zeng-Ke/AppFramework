@@ -1,5 +1,7 @@
 package com.zk.android_lib.http.base.callbacker;
 
+import android.util.Log;
+
 import com.zk.java_lib.exception.NetworkException;
 import com.zk.java_utils.log.LogUtil;
 
@@ -31,6 +33,7 @@ public class BaseCallBacker<T> extends DisposableObserver<T> {
 
     @Override
     public void onNext(T value) {
+        LogUtil.d("=====onNext",value);
         mOberver.onCallBack(value);
     }
 

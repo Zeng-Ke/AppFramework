@@ -9,7 +9,7 @@ import com.zk.android_lib.service.FirstService;
 import com.zk.android_utils.base.IView;
 import com.zk.android_utils.cache.DiskCacheHandler;
 import com.zk.android_utils.cache.DisklruCacheProvider;
-import com.zk.android_utils.cache.HttpCacheMode;
+import com.zk.android_lib.http.cache.HttpCacheMode;
 import com.zk.java_lib.bean.DoubleListBean;
 import com.zk.java_lib.bean.PhoneInfoBean;
 import com.zk.java_lib.bean.base.BaseBean;
@@ -59,7 +59,7 @@ public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivit
                         if (commonDataBeanBaseBean != null && commonDataBeanBaseBean.items.size() > 0)
                             getView().onGetDataSuccess(commonDataBeanBaseBean.items.get(0).name);
                     }
-                }, HttpCacheMode.ONLY_HTTP);
+                }, HttpCacheMode.CACHE_HTTP);
     }
 
 
@@ -97,7 +97,6 @@ public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivit
                             public void onCallBack(String s) {
                                 getView().onGetDataSuccess(s + str);
                             }
-
                         });
 
     }

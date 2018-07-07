@@ -1,4 +1,4 @@
-package com.zk.android_utils.cache;
+package com.zk.android_lib.http.cache;
 
 import android.support.annotation.IntDef;
 
@@ -24,7 +24,9 @@ public enum HttpCacheMode {
     }*/
 
 
-    ONLY_HTTP("OnlyHttpStrategy");
+    FIRST_CACHE("FirstCacheStrategy"),//先加载缓存，缓存没有再加载网络
+    FIRST_HTTP("FirstHttpStrategy"),//先加载网络失败再加载缓存
+    CACHE_HTTP("CacheAndHttpStrategy");//先加载缓存，再加载网络会回调两次
 
 
     public String className;

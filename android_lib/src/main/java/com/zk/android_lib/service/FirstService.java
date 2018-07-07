@@ -9,7 +9,7 @@ import com.zk.android_lib.http.base.HttpCreator;
 import com.zk.android_lib.http.base.RxUtils;
 import com.zk.android_lib.http.base.callbacker.BaseCallBacker;
 import com.zk.android_lib.http.base.callbacker.ICallbacker;
-import com.zk.android_utils.cache.HttpCacheMode;
+import com.zk.android_lib.http.cache.HttpCacheMode;
 import com.zk.java_lib.bean.DoubleListBean;
 import com.zk.java_lib.bean.PhoneInfoBean;
 import com.zk.java_lib.bean.base.BaseBean;
@@ -51,13 +51,13 @@ public class FirstService extends BaseService {
     public void getJob(ICallbacker<CommonDataBean<DoubleListBean>> oberver, HttpCacheMode cacheMode) {
         mIFirstApi
                 .getJob()
-               .compose(RxUtils.io_main(new RxCache(cacheMode)
-                       .<CommonDataBean<DoubleListBean>>excute("job",new TypeToken<CommonDataBean<DoubleListBean>>(){}.getType())))
-              // .compose(RxUtils.<CommonDataBean<DoubleListBean>>io_main())
+                .compose(RxUtils.io_main(new RxCache()
+                        .<CommonDataBean<DoubleListBean>>excute(cacheMode, "job", new
+                                TypeToken<CommonDataBean<DoubleListBean>>() {
+                                }.getType())))
+                // .compose(RxUtils.<CommonDataBean<DoubleListBean>>io_main())
                 .subscribe(getCallBacker(oberver));
     }
-
-
 
 
     public void getJob(AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>, String> function, ICallbacker<String> oberver) {
