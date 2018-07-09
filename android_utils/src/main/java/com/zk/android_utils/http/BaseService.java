@@ -1,7 +1,8 @@
-package com.zk.android_lib.http.base;
+package com.zk.android_utils.http;
 
-import com.zk.android_lib.http.base.callbacker.BaseCallBacker;
-import com.zk.android_lib.http.base.callbacker.ICallbacker;
+
+import com.zk.android_utils.http.callbacker.BaseCallBacker;
+import com.zk.android_utils.http.callbacker.ICallbacker;
 
 /**
  * author: ZK.

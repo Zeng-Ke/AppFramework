@@ -1,8 +1,9 @@
 package com.zk.android_lib.presenters.base;
 
-import com.zk.android_lib.http.base.IUnbinderManager;
+
 import com.zk.android_utils.base.BasePresenter;
 import com.zk.android_utils.base.IView;
+import com.zk.android_utils.http.IUnbinderManager;
 
 import java.util.LinkedList;
 

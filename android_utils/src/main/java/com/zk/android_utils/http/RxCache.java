@@ -1,13 +1,12 @@
-package com.zk.android_lib.http.base;
+package com.zk.android_utils.http;
 
-import com.zk.android_lib.http.cache.HttpCacheMode;
-import com.zk.android_lib.http.cache.ICacheStrategy;
 import com.zk.android_utils.cache.DiskCacheHandler;
 import com.zk.android_utils.cache.DisklruCacheProvider;
+import com.zk.android_utils.http.cache.HttpCacheMode;
+import com.zk.android_utils.http.cache.ICacheStrategy;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;

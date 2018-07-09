@@ -1,9 +1,10 @@
-package com.zk.android_lib.http.base;
+package com.zk.android_lib.http;
 
 import com.zk.java_utils.JsonUtils;
 import com.zk.java_utils.log.LogUtil;
 
 import okhttp3.logging.HttpLoggingInterceptor;
+
 
 /**
  * author: ZK.

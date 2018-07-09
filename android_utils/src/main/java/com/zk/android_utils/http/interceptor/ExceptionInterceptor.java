@@ -1,12 +1,9 @@
-package com.zk.android_lib.http.base.interceptor;
-
-import android.util.Log;
+package com.zk.android_utils.http.interceptor;
 
 import com.zk.java_lib.bean.base.BaseBean;
 import com.zk.java_lib.exception.ApiException;
 import com.zk.java_lib.exception.ErrorCode;
 import com.zk.java_lib.exception.NetworkException;
-import com.zk.java_utils.log.LogUtil;
 
 import io.reactivex.functions.Function;
 

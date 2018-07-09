@@ -1,4 +1,4 @@
-package com.zk.android_lib.http.cache;
+package com.zk.android_utils.http.cache;
 
 import android.support.annotation.IntDef;
 

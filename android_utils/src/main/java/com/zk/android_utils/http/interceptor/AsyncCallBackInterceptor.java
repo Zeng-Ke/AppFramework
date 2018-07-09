@@ -1,4 +1,4 @@
-package com.zk.android_lib.http.base.interceptor;
+package com.zk.android_utils.http.interceptor;
 
 import io.reactivex.functions.Function;
 

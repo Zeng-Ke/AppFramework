@@ -1,4 +1,4 @@
-package com.zk.android_lib.http.base;
+package com.zk.android_utils.http;
 
 import io.reactivex.disposables.Disposable;
 

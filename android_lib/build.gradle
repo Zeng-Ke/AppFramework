@@ -32,11 +32,11 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.1'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     //连接rxjava + retrofit
-    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     // Retroft支持Gson解析
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     //okhhtp日志拦截器
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation project(':java_lib')
 }

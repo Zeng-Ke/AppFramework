@@ -1,7 +1,6 @@
-package com.zk.android_lib.http.base.interceptor;
+package com.zk.android_utils.http.interceptor;
 
 import com.zk.java_lib.bean.base.BaseBean;
-import com.zk.java_utils.log.LogUtil;
 
 import io.reactivex.functions.Function;
 

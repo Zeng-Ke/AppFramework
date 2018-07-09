@@ -1,8 +1,9 @@
-package com.zk.android_lib.http.base;
+package com.zk.android_lib.http;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.zk.android_lib.api.IFirstApi;
 import com.zk.android_lib.api.ISecondApi;
+import com.zk.android_utils.http.HttpConstants;
 
 import java.io.IOException;
 import java.util.Map;

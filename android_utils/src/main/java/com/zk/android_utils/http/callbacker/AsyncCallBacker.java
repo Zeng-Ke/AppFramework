@@ -1,8 +1,8 @@
-package com.zk.android_lib.http.base.callbacker;
+package com.zk.android_utils.http.callbacker;
 
-import com.zk.android_lib.http.base.IUnbinderManager;
 import com.zk.android_utils.base.BaseActivity;
 import com.zk.android_utils.base.BaseApplication;
+import com.zk.android_utils.http.IUnbinderManager;
 
 import io.reactivex.disposables.Disposable;
 

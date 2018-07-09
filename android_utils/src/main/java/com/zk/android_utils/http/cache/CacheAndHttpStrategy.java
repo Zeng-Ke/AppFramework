@@ -1,6 +1,7 @@
-package com.zk.android_lib.http.cache;
+package com.zk.android_utils.http.cache;
 
-import com.zk.android_lib.http.base.RxCacheHandler;
+
+import com.zk.android_utils.http.RxCacheHandler;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;

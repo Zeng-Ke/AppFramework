@@ -1,10 +1,7 @@
-package com.zk.android_lib.http.base;
+package com.zk.android_utils.http;
 
-
-import android.util.Log;
 
 import com.zk.android_utils.cache.DiskCacheHandler;
-import com.zk.java_utils.log.LogUtil;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
