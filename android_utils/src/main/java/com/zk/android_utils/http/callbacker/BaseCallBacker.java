@@ -31,7 +31,6 @@ public class BaseCallBacker<T> extends DisposableObserver<T> {
 
     @Override
     public void onNext(T value) {
-        LogUtil.d("=====onNext",value);
         mOberver.onCallBack(value);
     }
 

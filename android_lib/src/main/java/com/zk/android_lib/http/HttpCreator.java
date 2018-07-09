@@ -36,7 +36,7 @@ public class HttpCreator {
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(new RequestHeaderInterceptor(config))
-                .addNetworkInterceptor(new HttpLoggingInterceptor(new HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addInterceptor(new HttpLoggingInterceptor(new HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
         Retrofit retrofit = new Retrofit
                 .Builder()

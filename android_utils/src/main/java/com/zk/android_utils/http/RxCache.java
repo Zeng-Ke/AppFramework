@@ -23,17 +23,22 @@ import io.reactivex.functions.Function;
 public class RxCache {
 
 
-    private final RxCacheHandler mRxCacheHandler;
-    private Map<String, ICacheStrategy> cacheStrategyMap = new ConcurrentHashMap();
+    private static RxCacheHandler mRxCacheHandler = null;
+    private static Map<String, ICacheStrategy> cacheStrategyMap = new ConcurrentHashMap();
 
-    public RxCache() {
-        mRxCacheHandler = new RxCacheHandler.Builder().setCacheHandler(new DiskCacheHandler(new DisklruCacheProvider("httpdata", 50, 2,
-                DisklruCacheProvider.SIZEUNIT.MB))).build();
+    private RxCache() {
+    }
+
+    public static void init(String uniqueName, long maxsize, int valuecount, DisklruCacheProvider.SIZEUNIT sizeunit) {
+        mRxCacheHandler = new RxCacheHandler.Builder().setCacheHandler(new DiskCacheHandler(new DisklruCacheProvider(uniqueName, maxsize,
+                valuecount, sizeunit))).build();
     }
 
 
+    public static <T> ObservableTransformer<T, T> excute(HttpCacheMode cacheMode, final String key, final Class<T> tClass) {
+        if (mRxCacheHandler == null)
+            throw new NullPointerException("you must call RxCache.init() in Application'oncreate()");
 
-    public <T> ObservableTransformer<T, T> excute(HttpCacheMode cacheMode, final String key, final Class<T> tClass) {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> upstream) {
@@ -51,17 +56,20 @@ public class RxCache {
     }
 
 
-    public <T> ObservableTransformer<T, T> excute(HttpCacheMode cacheMode, final String key, final Type type) {
+    public static <T> ObservableTransformer<T, T> excute(HttpCacheMode cacheMode, final String key, final Type type) {
         return getCacheStrategy(cacheMode).excute(key, type);
 
     }
 
-    public <T> ObservableTransformer<T, T> excute(HttpCacheMode cacheMode, final String key, final Type type, long time, TimeUnit unit) {
+    public static <T> ObservableTransformer<T, T> excute(HttpCacheMode cacheMode, final String key, final Type type, long time, TimeUnit
+            unit) {
         return getCacheStrategy(cacheMode).excute(key, type, time, unit);
     }
 
 
-    public ICacheStrategy getCacheStrategy(HttpCacheMode cacheMode) {
+    public static ICacheStrategy getCacheStrategy(HttpCacheMode cacheMode) {
+        if (mRxCacheHandler == null)
+            throw new NullPointerException("you must call RxCache.init() in Application'oncreate()");
 
         ICacheStrategy cacheStrategy;
         String pakName = ICacheStrategy.class.getPackage().getName();

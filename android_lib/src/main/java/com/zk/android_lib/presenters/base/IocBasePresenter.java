@@ -1,6 +1,7 @@
 package com.zk.android_lib.presenters.base;
 
-
+import com.zk.android_lib.ioc.component.DaggerPresenterComponent;
+import com.zk.android_lib.ioc.component.PresenterComponent;
 import com.zk.android_utils.base.BasePresenter;
 import com.zk.android_utils.base.IView;
 import com.zk.android_utils.http.IUnbinderManager;
@@ -11,16 +12,22 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * author: ZK.
- * date:   On 2018-06-26.
+ * date:   On 2018-07-09.
  */
-public class UnbinderPresenter<T extends IView> extends BasePresenter<T> implements IUnbinderManager {
+public abstract class IocBasePresenter<T extends IView> extends BasePresenter<T> implements IUnbinderManager {
+
 
     private volatile LinkedList<Disposable> unbinders = new LinkedList<>();
 
+    private final PresenterComponent mComponent;
 
-    public UnbinderPresenter(T iView) {
+    public IocBasePresenter(T iView) {
         super(iView);
+        mComponent = DaggerPresenterComponent.builder().build();
+        componentInject(mComponent);
     }
+
+    public abstract void componentInject(PresenterComponent component);
 
 
     @Override

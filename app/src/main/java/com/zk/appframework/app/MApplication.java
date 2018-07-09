@@ -1,7 +1,7 @@
 package com.zk.appframework.app;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zk.android_utils.base.BaseApplication;
+import com.zk.android_lib.presenters.base.BaseApplication;
 import com.zk.appframework.BuildConfig;
 
 /**

@@ -42,7 +42,7 @@ public class DisklruCacheProvider {
             if (!cacheDir.exists()) {
                 cacheDir.mkdir();
             }
-            diskLruCache = DiskLruCache.open(cacheDir, CACHE_VERSION, valuecount, maxsize * sizeunit.value);
+            diskLruCache = DiskLruCache.open(cacheDir, CACHE_VERSION, valuecount>1 ?valuecount:  2, maxsize * sizeunit.value);
         } catch (IOException e) {
             LogUtil.e(e.getClass().getName() + "   :   " + e.getMessage());
             e.printStackTrace();

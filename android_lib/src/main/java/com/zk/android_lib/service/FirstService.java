@@ -2,7 +2,6 @@ package com.zk.android_lib.service;
 
 import com.google.gson.reflect.TypeToken;
 import com.zk.android_lib.api.IFirstApi;
-import com.zk.android_lib.http.HttpCreator;
 import com.zk.android_utils.http.BaseService;
 import com.zk.android_utils.http.RxCache;
 import com.zk.android_utils.http.RxUtils;
@@ -19,6 +18,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -28,11 +28,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class FirstService extends BaseService {
 
+    IFirstApi mIFirstApi;
 
-    private final IFirstApi mIFirstApi;
-
-    public FirstService() {
-        mIFirstApi = HttpCreator.createApi(IFirstApi.class);
+    public FirstService(IFirstApi IFirstApi) {
+        mIFirstApi = IFirstApi;
     }
 
 
@@ -51,8 +50,7 @@ public class FirstService extends BaseService {
     public void getJob(ICallbacker<CommonDataBean<DoubleListBean>> oberver, HttpCacheMode cacheMode) {
         mIFirstApi
                 .getJob()
-                .compose(RxUtils.io_main(new RxCache()
-                        .<CommonDataBean<DoubleListBean>>excute(cacheMode, "job", new
+                .compose(RxUtils.io_main(RxCache.<CommonDataBean<DoubleListBean>>excute(cacheMode, "job", new
                                 TypeToken<CommonDataBean<DoubleListBean>>() {
                                 }.getType())))
                 // .compose(RxUtils.<CommonDataBean<DoubleListBean>>io_main())

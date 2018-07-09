@@ -1,7 +1,8 @@
 package com.zk.android_lib.presenters;
 
 import com.google.gson.reflect.TypeToken;
-import com.zk.android_lib.presenters.base.UnbinderPresenter;
+import com.zk.android_lib.ioc.component.PresenterComponent;
+import com.zk.android_lib.presenters.base.IocBasePresenter;
 import com.zk.android_lib.service.FirstService;
 import com.zk.android_utils.base.IView;
 import com.zk.android_utils.cache.DiskCacheHandler;
@@ -18,18 +19,29 @@ import com.zk.java_utils.log.LogUtil;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.ObservableSource;
 
 /**
  * author: ZK.
  * date:   On 2018/6/11.
  */
-public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivityPresenter.IndexView> {
+public class HomePageActivityPresenter extends IocBasePresenter<HomePageActivityPresenter.IndexView> {
 
+
+    @Inject
+    FirstService firstService;
 
     public HomePageActivityPresenter(IndexView iView) {
         super(iView);
     }
+
+    @Override
+    public void componentInject(PresenterComponent component) {
+        component.inject(this);
+    }
+
 
     public interface IndexView extends IView {
         void onGetDataSuccess(String info);
@@ -38,7 +50,6 @@ public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivit
 
     public void getPhoneInfo(String phoneNumber) {
 
-        FirstService firstService = new FirstService();
         firstService.getPhoneInfo(phoneNumber, "JQ4iONjs1LBg60Ghgj842cKvjgVE7dDRXfBpxsvWTrgP16hY5RtOaVgqy1Wky7MT",
                 new AsyncCallBacker<BaseBean<List<PhoneInfoBean>>>(this, true) {
                     @Override
@@ -51,7 +62,6 @@ public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivit
     }
 
     public void getData1() {
-        FirstService firstService = new FirstService();
         firstService
                 .getJob(new AsyncCallBacker<CommonDataBean<DoubleListBean>>(this, true) {
                     @Override
@@ -64,7 +74,6 @@ public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivit
 
 
     public void getJob() {
-        FirstService firstService = new FirstService();
         firstService
                 .getJob(
                         new AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>, String>() {
@@ -83,7 +92,6 @@ public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivit
     }
 
     public void getArea(final String str) {
-        FirstService firstService = new FirstService();
         firstService
                 .getArea(1, "0001"
                         , new AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>, String>() {
@@ -102,7 +110,6 @@ public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivit
     }
 
     public void getData() {
-
         final String key = "data";
         final DiskCacheHandler diskCacheHandler = new DiskCacheHandler(new DisklruCacheProvider("httwwpdata", 50, 2, DisklruCacheProvider
                 .SIZEUNIT
@@ -115,7 +122,6 @@ public class HomePageActivityPresenter extends UnbinderPresenter<HomePageActivit
             getView().onGetDataSuccess(doubleListBeans.get(2).name);
             return;
         }
-        final FirstService firstService = new FirstService();
         firstService
                 .getJob(new AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>, String>() {
                     @Override
