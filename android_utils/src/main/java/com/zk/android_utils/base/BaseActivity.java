@@ -34,7 +34,7 @@ public class BaseActivity extends AppCompatActivity implements IView {
         ThreadExecutor.runInMain(new Runnable() {
             @Override
             public void run() {
-                ToastUtils.showShort(BaseActivity.this, throwable.getMessage());
+                ToastUtils.showShort( throwable.getMessage());
             }
         });
     }
