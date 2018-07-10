@@ -1,4 +1,4 @@
-package com.zk.android_utils.cache;
+package com.zk.android_utils.cache.disk;
 
 import android.content.Context;
 import android.os.Environment;

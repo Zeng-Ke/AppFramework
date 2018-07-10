@@ -1,4 +1,4 @@
-package com.zk.android_utils.cache;
+package com.zk.android_utils.cache.disk;
 
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.zk.android_utils.utils.GsonUtils;

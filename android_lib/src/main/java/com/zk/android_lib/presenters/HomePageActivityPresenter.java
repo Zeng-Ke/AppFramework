@@ -1,12 +1,10 @@
 package com.zk.android_lib.presenters;
 
-import com.google.gson.reflect.TypeToken;
+import com.zk.android_lib.cache.ClientSetting;
 import com.zk.android_lib.ioc.component.PresenterComponent;
 import com.zk.android_lib.presenters.base.IocBasePresenter;
 import com.zk.android_lib.service.FirstService;
 import com.zk.android_utils.base.IView;
-import com.zk.android_utils.cache.DiskCacheHandler;
-import com.zk.android_utils.cache.DisklruCacheProvider;
 import com.zk.android_utils.http.cache.HttpCacheMode;
 import com.zk.android_utils.http.callbacker.AsyncCallBacker;
 import com.zk.android_utils.http.interceptor.AsyncCallBackInterceptor;
@@ -66,8 +64,10 @@ public class HomePageActivityPresenter extends IocBasePresenter<HomePageActivity
                 .getJob(new AsyncCallBacker<CommonDataBean<DoubleListBean>>(this, true) {
                     @Override
                     public void onCallBack(CommonDataBean<DoubleListBean> commonDataBeanBaseBean) {
-                        if (commonDataBeanBaseBean != null && commonDataBeanBaseBean.items.size() > 0)
-                            getView().onGetDataSuccess(commonDataBeanBaseBean.items.get(0).name);
+                        if (commonDataBeanBaseBean != null && commonDataBeanBaseBean.items.size() > 0) {
+                            ClientSetting clientSetting = new ClientSetting();
+                            getView().onGetDataSuccess(commonDataBeanBaseBean.items.get(0).name + clientSetting.getOpenCount());
+                        }
                     }
                 }, HttpCacheMode.CACHE_HTTP);
     }
@@ -110,18 +110,7 @@ public class HomePageActivityPresenter extends IocBasePresenter<HomePageActivity
     }
 
     public void getData() {
-        final String key = "data";
-        final DiskCacheHandler diskCacheHandler = new DiskCacheHandler(new DisklruCacheProvider("httwwpdata", 50, 2, DisklruCacheProvider
-                .SIZEUNIT
-                .MB));
-       /* CommonDataBean<DoubleListBean> dataBean = diskCacheHandler.doGet(key, new TypeToken<CommonDataBean<DoubleListBean>>() {
-        }.getType());*/
-        List<DoubleListBean> doubleListBeans = diskCacheHandler.doGet(key, new TypeToken<List<DoubleListBean>>() {
-        }.getType());
-        if (doubleListBeans != null) {
-            getView().onGetDataSuccess(doubleListBeans.get(2).name);
-            return;
-        }
+
         firstService
                 .getJob(new AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>, String>() {
                     @Override
@@ -138,7 +127,6 @@ public class HomePageActivityPresenter extends IocBasePresenter<HomePageActivity
                                 new AsyncCallBackInterceptor<CommonDataBean<DoubleListBean>, String>() {
                                     @Override
                                     public String apply(CommonDataBean<DoubleListBean> doubleListBeanCommonDataBean) throws Exception {
-                                        diskCacheHandler.doSave(key, doubleListBeanCommonDataBean.items);
                                         return doubleListBeanCommonDataBean.items.get(2).name + "==" + s;
                                     }
                                 });

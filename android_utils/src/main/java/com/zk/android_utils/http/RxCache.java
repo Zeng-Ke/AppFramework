@@ -1,7 +1,7 @@
 package com.zk.android_utils.http;
 
-import com.zk.android_utils.cache.DiskCacheHandler;
-import com.zk.android_utils.cache.DisklruCacheProvider;
+import com.zk.android_utils.cache.disk.DiskCacheHandler;
+import com.zk.android_utils.cache.disk.DisklruCacheProvider;
 import com.zk.android_utils.http.cache.HttpCacheMode;
 import com.zk.android_utils.http.cache.ICacheStrategy;
 
@@ -33,7 +33,6 @@ public class RxCache {
         mRxCacheHandler = new RxCacheHandler.Builder().setCacheHandler(new DiskCacheHandler(new DisklruCacheProvider(uniqueName, maxsize,
                 valuecount, sizeunit))).build();
     }
-
 
     public static <T> ObservableTransformer<T, T> excute(HttpCacheMode cacheMode, final String key, final Class<T> tClass) {
         if (mRxCacheHandler == null)

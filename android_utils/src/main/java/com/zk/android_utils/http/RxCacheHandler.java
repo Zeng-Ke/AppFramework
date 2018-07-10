@@ -1,7 +1,7 @@
 package com.zk.android_utils.http;
 
 
-import com.zk.android_utils.cache.DiskCacheHandler;
+import com.zk.android_utils.cache.disk.DiskCacheHandler;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;

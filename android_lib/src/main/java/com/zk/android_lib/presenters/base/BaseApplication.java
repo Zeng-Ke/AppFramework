@@ -1,6 +1,6 @@
 package com.zk.android_lib.presenters.base;
 
-import com.zk.android_utils.cache.DisklruCacheProvider;
+import com.zk.android_utils.cache.disk.DisklruCacheProvider;
 import com.zk.android_utils.http.RxCache;
 
 /**

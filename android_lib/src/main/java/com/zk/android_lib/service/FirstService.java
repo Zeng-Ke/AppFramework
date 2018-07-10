@@ -51,8 +51,8 @@ public class FirstService extends BaseService {
         mIFirstApi
                 .getJob()
                 .compose(RxUtils.io_main(RxCache.<CommonDataBean<DoubleListBean>>excute(cacheMode, "job", new
-                                TypeToken<CommonDataBean<DoubleListBean>>() {
-                                }.getType())))
+                        TypeToken<CommonDataBean<DoubleListBean>>() {
+                        }.getType())))
                 // .compose(RxUtils.<CommonDataBean<DoubleListBean>>io_main())
                 .subscribe(getCallBacker(oberver));
     }
